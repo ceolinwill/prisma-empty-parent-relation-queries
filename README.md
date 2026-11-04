@@ -2,7 +2,7 @@
 
 With the query compiler (Prisma 7's default, driver adapters, `relationLoadStrategy: "query"`), a `findMany` or `findFirst` that matches no rows still sends one query per nested relation in its `include`/`select`. Each one is rendered with an empty key list as `WHERE "fk" IN (NULL)`, a statement that can't return a row, and nested relations repeat it level by level. The result is correct; the extra statements cost a round trip and a pool connection each. `findUnique` with no match already skips them.
 
-Reported in [prisma/orm#30761](https://github.com/prisma/orm/issues/30761).
+Reported in [prisma/orm#30761](https://github.com/prisma/orm/issues/30761) ([our evidence](https://github.com/prisma/orm/issues/30761#issuecomment-6623824909)).
 
 ## Reproduction
 
