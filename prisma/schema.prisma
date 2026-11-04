@@ -1,0 +1,27 @@
+generator client {
+  provider            = "prisma-client"
+  output              = "../generated"
+  importFileExtension = "ts"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model Parent {
+  id       Int     @id
+  children Child[]
+}
+
+model Child {
+  id       Int    @id
+  parentId Int
+  parent   Parent @relation(fields: [parentId], references: [id])
+  tagId    Int?
+  tag      Tag?   @relation(fields: [tagId], references: [id])
+}
+
+model Tag {
+  id       Int     @id
+  children Child[]
+}
